@@ -6,7 +6,7 @@ public interface Constants {
     String ENCOUNTER_TYPE = "encounter_type";
     String STEP_ONE = "step1";
     String STEP_TWO = "step2";
-
+    String ICCM_VISIT_GROUP = "iccm_visit_group";
     interface JSON_FORM_EXTRA {
         String JSON = "json";
         String ENCOUNTER_TYPE = "encounter_type";
@@ -15,6 +15,9 @@ public interface Constants {
     interface EVENT_TYPE {
         String MALARIA_CONFIRMATION = "Malaria Confirmation";
         String MALARIA_FOLLOW_UP_VISIT = "Malaria Follow-up Visit";
+        String ICCM_ENROLLMENT = "ICCM Enrollment";
+        String ICCM_SERVICES_VISIT = "ICCM Services Visit";
+        String VOID_EVENT = "Void Event";
     }
 
     interface FORMS {
@@ -25,6 +28,7 @@ public interface Constants {
     interface TABLES {
         String MALARIA_CONFIRMATION = "ec_malaria_confirmation";
         String MALARIA_FOLLOW_UP = "ec_malaria_follow_up_visit";
+        String ICCM_ENROLLMENT = "ec_iccm_enrollment";
     }
 
     interface ACTIVITY_PAYLOAD {
@@ -32,6 +36,8 @@ public interface Constants {
         String FAMILY_BASE_ENTITY_ID = "FAMILY_BASE_ENTITY_ID";
         String ACTION = "ACTION";
         String MALARIA_FORM_NAME = "MALARIA_FORM_NAME";
+        String EDIT_MODE = "editMode";
+        String MEMBER_PROFILE_OBJECT = "MemberObject";
 
     }
 

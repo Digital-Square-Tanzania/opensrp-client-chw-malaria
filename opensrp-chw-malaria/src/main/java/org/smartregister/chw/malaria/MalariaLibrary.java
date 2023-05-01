@@ -2,6 +2,8 @@ package org.smartregister.chw.malaria;
 
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
+import org.smartregister.chw.malaria.repository.VisitDetailsRepository;
+import org.smartregister.chw.malaria.repository.VisitRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
@@ -10,6 +12,10 @@ import id.zelory.compressor.Compressor;
 
 public class MalariaLibrary {
     private static MalariaLibrary instance;
+    private VisitRepository visitRepository;
+    private VisitDetailsRepository visitDetailsRepository;
+    private final String sourceDateFormat = "dd-MM-yyyy";
+    private final String saveDateFormat = "yyyy-MM-dd";
 
     private final Context context;
     private final Repository repository;
@@ -20,6 +26,10 @@ public class MalariaLibrary {
 
     private ClientProcessorForJava clientProcessorForJava;
     private Compressor compressor;
+    private final boolean submitOnSave = false;
+    public boolean isSubmitOnSave() {
+        return submitOnSave;
+    }
 
     public static void init(Context context, Repository repository, int applicationVersion, int databaseVersion) {
         if (instance == null) {
@@ -76,6 +86,28 @@ public class MalariaLibrary {
 
     public void setClientProcessorForJava(ClientProcessorForJava clientProcessorForJava) {
         this.clientProcessorForJava = clientProcessorForJava;
+    }
+
+    public VisitRepository visitRepository() {
+        if (visitRepository == null) {
+            visitRepository = new VisitRepository();
+        }
+        return visitRepository;
+    }
+
+    public VisitDetailsRepository visitDetailsRepository() {
+        if (visitDetailsRepository == null) {
+            visitDetailsRepository = new VisitDetailsRepository();
+        }
+        return visitDetailsRepository;
+    }
+
+    public String getSourceDateFormat() {
+        return sourceDateFormat;
+    }
+
+    public String getSaveDateFormat() {
+        return saveDateFormat;
     }
 
 }

@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:padding="10dp"
-                android:text="@string/undo"
+                android:text="@string/edit"
                 android:textColor="@color/primary" />
 
         </RelativeLayout>

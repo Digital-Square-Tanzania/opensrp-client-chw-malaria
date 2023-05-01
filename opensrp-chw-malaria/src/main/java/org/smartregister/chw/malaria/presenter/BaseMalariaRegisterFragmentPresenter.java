@@ -41,7 +41,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public String getDefaultSortQuery() {
-        return Constants.TABLES.MALARIA_CONFIRMATION + "." + DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ";
+        return getMainTable() + "." + DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ";
     }
 
     @Override
@@ -63,7 +63,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public void initializeQueries(String mainCondition) {
-        String tableName = Constants.TABLES.MALARIA_CONFIRMATION;
+        String tableName = getMainTable();
         mainCondition = trim(getMainCondition()).equals("") ? mainCondition : getMainCondition();
         String countSelect = model.countSelect(tableName, mainCondition);
         String mainSelect = model.mainSelect(tableName, mainCondition);
