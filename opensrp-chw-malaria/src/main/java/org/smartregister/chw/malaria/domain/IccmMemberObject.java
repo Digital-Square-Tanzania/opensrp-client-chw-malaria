@@ -21,7 +21,7 @@ public class IccmMemberObject extends MemberObject implements Serializable {
         this.temperature = temperature;
     }
 
-    public int getRespiratoryRate() {
+    public Integer getRespiratoryRate() {
         return respiratoryRate;
     }
 

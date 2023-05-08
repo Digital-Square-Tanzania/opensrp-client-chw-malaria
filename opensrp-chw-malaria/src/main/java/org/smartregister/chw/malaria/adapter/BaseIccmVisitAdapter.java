@@ -77,9 +77,7 @@ public class BaseIccmVisitAdapter extends RecyclerView.Adapter<BaseIccmVisitAdap
         }
 
         String title = MessageFormat.format("{0}<i>{1}</i>",
-                ldVisitAction.getTitle(),
-                ldVisitAction.isOptional() ? "" : "*"
-        );
+                ldVisitAction.getTitle(), "");
         holder.titleText.setText(Html.fromHtml(title));
         if (StringUtils.isNotBlank(ldVisitAction.getSubTitle())) {
 

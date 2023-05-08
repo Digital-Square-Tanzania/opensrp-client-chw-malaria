@@ -172,6 +172,8 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
             } catch (JSONException e) {
                 Timber.e(e);
                 displayToast(getString(R.string.error_unable_to_save_form));
+            } catch (NullPointerException e) {
+                Timber.e(e);
             }
             startClientProcessing();
         }
