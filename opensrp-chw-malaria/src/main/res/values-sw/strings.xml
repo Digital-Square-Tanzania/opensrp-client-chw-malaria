@@ -54,7 +54,7 @@
 
 
     <string name="record_iccm_services">Rekodi huduma ya iCCM</string>
-    <string name="iccm_visit">iccm visit</string>
+    <string name="iccm_visit">iCCM visit</string>
     <string name="optional">optional</string>
     <string name="error_unable_save_visit">unable to save visit</string>
     <string name="process_visit">Process Visit</string>

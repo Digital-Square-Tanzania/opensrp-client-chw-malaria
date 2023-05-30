@@ -6,6 +6,8 @@ public interface Constants {
     String ENCOUNTER_TYPE = "encounter_type";
     String STEP_ONE = "step1";
     String STEP_TWO = "step2";
+    String STEP_THREE = "step3";
+    String STEP_FOUR = "step4";
     String ICCM_VISIT_GROUP = "iccm_visit_group";
     interface JSON_FORM_EXTRA {
         String JSON = "json";
