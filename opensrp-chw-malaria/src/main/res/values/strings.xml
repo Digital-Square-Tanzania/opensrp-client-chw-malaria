@@ -59,6 +59,6 @@
     <string name="iccm_visit">iCCM visit</string>
     <string name="optional">optional</string>
     <string name="error_unable_save_visit">unable to save visit</string>
-    <string name="process_visit">Mark Visit As Complete</string>
+    <string name="process_visit">Save and Complete</string>
 
 </resources>
