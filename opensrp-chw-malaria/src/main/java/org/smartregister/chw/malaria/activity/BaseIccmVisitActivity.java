@@ -1,9 +1,8 @@
 package org.smartregister.chw.malaria.activity;
 
 
-import static org.smartregister.chw.malaria.util.Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID;
 import static org.smartregister.chw.malaria.util.Constants.ACTIVITY_PAYLOAD.EDIT_MODE;
-import static org.smartregister.chw.malaria.util.Constants.ACTIVITY_PAYLOAD.MEMBER_PROFILE_OBJECT;
+import static org.smartregister.chw.malaria.util.Constants.ACTIVITY_PAYLOAD.FORM_SUBMISSION_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,6 +27,7 @@ import org.smartregister.AllConstants;
 import org.smartregister.chw.malaria.MalariaLibrary;
 import org.smartregister.chw.malaria.adapter.BaseIccmVisitAdapter;
 import org.smartregister.chw.malaria.contract.BaseIccmVisitContract;
+import org.smartregister.chw.malaria.dao.IccmDao;
 import org.smartregister.chw.malaria.domain.IccmMemberObject;
 import org.smartregister.chw.malaria.interactor.BaseIccmVisitInteractor;
 import org.smartregister.chw.malaria.model.BaseIccmVisitAction;
@@ -46,7 +46,7 @@ public class BaseIccmVisitActivity extends SecuredActivity implements BaseIccmVi
     protected Map<String, BaseIccmVisitAction> actionList = new LinkedHashMap<>();
     protected BaseIccmVisitContract.Presenter presenter;
     protected IccmMemberObject memberObject;
-    protected String baseEntityID;
+    protected String formSubmissionId;
     protected Boolean isEditMode = false;
     protected RecyclerView.Adapter mAdapter;
     protected ProgressBar progressBar;
@@ -56,9 +56,9 @@ public class BaseIccmVisitActivity extends SecuredActivity implements BaseIccmVi
     protected String confirmCloseTitle;
     protected String confirmCloseMessage;
 
-    public static void startMe(Activity activity, String baseEntityID, Boolean isEditMode) {
+    public static void startMe(Activity activity, String formSubmissionId, Boolean isEditMode) {
         Intent intent = new Intent(activity, BaseIccmVisitActivity.class);
-        intent.putExtra(BASE_ENTITY_ID, baseEntityID);
+        intent.putExtra(FORM_SUBMISSION_ID, formSubmissionId);
         intent.putExtra(EDIT_MODE, isEditMode);
         activity.startActivityForResult(intent, Constants.REQUEST_CODE_GET_JSON);
     }
@@ -69,9 +69,9 @@ public class BaseIccmVisitActivity extends SecuredActivity implements BaseIccmVi
         setContentView(R.layout.activity_base_iccm_visit);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            memberObject = (IccmMemberObject) getIntent().getSerializableExtra(MEMBER_PROFILE_OBJECT);
             isEditMode = getIntent().getBooleanExtra(EDIT_MODE, false);
-            baseEntityID = getIntent().getStringExtra(BASE_ENTITY_ID);
+            formSubmissionId = getIntent().getStringExtra(FORM_SUBMISSION_ID);
+            memberObject = IccmDao.getMember(formSubmissionId);
         }
 
         confirmCloseTitle = getString(R.string.confirm_form_close);
@@ -80,8 +80,8 @@ public class BaseIccmVisitActivity extends SecuredActivity implements BaseIccmVi
         displayProgressBar(true);
         registerPresenter();
         if (presenter != null) {
-            if (StringUtils.isNotBlank(baseEntityID)) {
-                presenter.reloadMemberDetails(baseEntityID);
+            if (StringUtils.isNotBlank(formSubmissionId)) {
+                presenter.reloadMemberDetails(formSubmissionId);
             } else {
                 presenter.initialize();
             }

@@ -9,6 +9,7 @@ public class IccmMemberObject extends MemberObject implements Serializable {
     private Double temperature;
     private Integer respiratoryRate;
     private Double weight;
+    private String iccmEnrollmentFormSubmissionId;
 
     public IccmMemberObject() {
     }
@@ -39,5 +40,13 @@ public class IccmMemberObject extends MemberObject implements Serializable {
 
     public String getFullName() {
         return Utils.getName(getFirstName(), getLastName());
+    }
+
+    public String getIccmEnrollmentFormSubmissionId() {
+        return iccmEnrollmentFormSubmissionId;
+    }
+
+    public void setIccmEnrollmentFormSubmissionId(String iccmEnrollmentFormSubmissionId) {
+        this.iccmEnrollmentFormSubmissionId = iccmEnrollmentFormSubmissionId;
     }
 }
