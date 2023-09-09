@@ -3,6 +3,7 @@
     <string name="error_unable_to_start_form">An error occurred when starting the form</string>
     <string name="error_unable_to_save_form">An error occurred when saving the form</string>
     <string name="malaria">Malaria</string>
+    <string name="iccm">iCCM</string>
     <string name="add_member">Add Member</string>
     <string name="sort">Sort</string>
     <string name="home">Home</string>
@@ -13,9 +14,11 @@
     <string name="interpunct" translatable="false">\u00b7</string>
     <string name="malaria_followup_visit">FOLLOWUP\nVISIT</string>
     <string name="record_malaria">Record malaria follow-up</string>
-    <string name="return_to_previous_page">Return all Malaria Clients</string>
+    <string name="return_to_previous_page">Return to all Malaria Clients</string>
+    <string name="return_to_previous_iccm_page">Return to all iCCM Clients</string>
     <string name="last_visit_40_days_ago">Last visit %1$s ago</string>
     <string name="view_medical_history">View medical history</string>
+    <string name="medical_history">Medical history</string>
     <string name="call_no_number_provided">(no number provided)</string>
     <string name="view_upcoming_services">View upcoming services</string>
     <string name="family_has_nothing_due">Family has nothing due</string>
@@ -50,5 +53,12 @@
     <string name="edit">EDIT</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+
+
+    <string name="record_iccm_services">Provide iCCM Services</string>
+    <string name="iccm_visit">iCCM visit</string>
+    <string name="optional">optional</string>
+    <string name="error_unable_save_visit">unable to save visit</string>
+    <string name="process_visit">Save and Complete</string>
 
 </resources>

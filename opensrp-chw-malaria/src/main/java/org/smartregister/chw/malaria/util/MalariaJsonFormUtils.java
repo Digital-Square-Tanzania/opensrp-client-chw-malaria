@@ -14,7 +14,9 @@ import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.FormUtils;
 
 import static org.smartregister.chw.malaria.util.Constants.ENCOUNTER_TYPE;
+import static org.smartregister.chw.malaria.util.Constants.STEP_FOUR;
 import static org.smartregister.chw.malaria.util.Constants.STEP_ONE;
+import static org.smartregister.chw.malaria.util.Constants.STEP_THREE;
 import static org.smartregister.chw.malaria.util.Constants.STEP_TWO;
 
 public class MalariaJsonFormUtils extends org.smartregister.util.JsonFormUtils {
@@ -33,6 +35,18 @@ public class MalariaJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         try {
             JSONArray fieldsOne = fields(jsonForm, STEP_ONE);
             JSONArray fieldsTwo = fields(jsonForm, STEP_TWO);
+            JSONArray fieldsThree = fields(jsonForm, STEP_THREE);
+            JSONArray fieldsFour = fields(jsonForm, STEP_FOUR);
+            if (fieldsFour != null) {
+                for (int i = 0; i < fieldsFour.length(); i++) {
+                    fieldsOne.put(fieldsFour.get(i));
+                }
+            }
+            if (fieldsThree != null) {
+                for (int i = 0; i < fieldsThree.length(); i++) {
+                    fieldsOne.put(fieldsThree.get(i));
+                }
+            }
             if (fieldsTwo != null) {
                 for (int i = 0; i < fieldsTwo.length(); i++) {
                     fieldsOne.put(fieldsTwo.get(i));

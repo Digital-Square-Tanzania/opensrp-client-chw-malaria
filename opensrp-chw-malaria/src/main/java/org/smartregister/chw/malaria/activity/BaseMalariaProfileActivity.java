@@ -61,6 +61,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected RelativeLayout rlUpcomingServices;
     protected RelativeLayout rlFamilyServicesDue;
     protected RelativeLayout visitStatus;
+    protected TextView textviewNotVisitThisMonth;
     protected ImageView imageViewCross;
     protected TextView textViewUndo;
     protected RelativeLayout rlMalariaPositiveDate;
@@ -121,6 +122,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         rlMalariaPositiveDate = findViewById(R.id.rlMalariaPositiveDate);
         textViewVisitDone = findViewById(R.id.textview_visit_done);
         visitStatus = findViewById(R.id.record_visit_not_done_bar);
+        textviewNotVisitThisMonth = findViewById(R.id.textview_not_visit_this_month);
+
         visitDone = findViewById(R.id.visit_done_bar);
         recordVisits = findViewById(R.id.record_visits);
         progressBar = findViewById(R.id.progress_bar);
