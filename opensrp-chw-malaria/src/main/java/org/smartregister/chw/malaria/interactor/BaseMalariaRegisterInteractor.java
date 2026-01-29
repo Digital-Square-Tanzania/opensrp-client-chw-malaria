@@ -1,6 +1,6 @@
 package org.smartregister.chw.malaria.interactor;
 
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import org.smartregister.chw.malaria.contract.MalariaRegisterContract;
 import org.smartregister.chw.malaria.util.AppExecutors;
