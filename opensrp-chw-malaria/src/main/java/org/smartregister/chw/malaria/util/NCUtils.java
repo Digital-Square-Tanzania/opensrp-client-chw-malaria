@@ -270,6 +270,56 @@ public class NCUtils {
         return eventToVisit(event, JsonFormUtils.generateRandomUUIDString());
     }
 
+    // executed by event client processor
+    public static Visit eventToVisit(org.smartregister.domain.Event event) throws JSONException {
+        List<String> exceptions = Arrays.asList(default_obs);
+
+        Visit visit = new Visit();
+        visit.setVisitId(JsonFormUtils.generateRandomUUIDString());
+        visit.setBaseEntityId(event.getBaseEntityId());
+        visit.setDate(event.getEventDate().toDate());
+        visit.setVisitType(event.getEventType());
+        visit.setEventId(event.getEventId());
+        visit.setFormSubmissionId(event.getFormSubmissionId());
+        visit.setJson(new JSONObject(JsonFormUtils.gson.toJson(event)).toString());
+        visit.setProcessed(true);
+        visit.setCreatedAt(new Date());
+        visit.setUpdatedAt(new Date());
+        Map<String, String> eventDetails = event.getDetails();
+        if (eventDetails != null) {
+            visit.setVisitGroup(eventDetails.get(Constants.ICCM_VISIT_GROUP));
+        }
+
+        Map<String, List<VisitDetail>> details = new HashMap<>();
+        if (event.getObs() != null) {
+            for (org.smartregister.domain.Obs obs : event.getObs()) {
+                if (!exceptions.contains(obs.getFormSubmissionField())) {
+                    VisitDetail detail = new VisitDetail();
+                    detail.setVisitDetailsId(JsonFormUtils.generateRandomUUIDString());
+                    detail.setVisitId(visit.getVisitId());
+                    detail.setVisitKey(obs.getFormSubmissionField());
+                    detail.setParentCode(obs.getParentCode());
+                    detail.setDetails(getDetailsValue(detail, obs.getValues().toString()));
+                    detail.setHumanReadable(getDetailsValue(detail, obs.getHumanReadableValues().toString()));
+                    detail.setProcessed(true);
+                    detail.setCreatedAt(new Date());
+                    detail.setUpdatedAt(new Date());
+
+                    List<VisitDetail> currentList = details.get(detail.getVisitKey());
+                    if (currentList == null) {
+                        currentList = new ArrayList<>();
+                    }
+
+                    currentList.add(detail);
+                    details.put(detail.getVisitKey(), currentList);
+                }
+            }
+        }
+
+        visit.setVisitDetails(details);
+        return visit;
+    }
+
     public static void processHomeVisit(EventClient baseEvent) {
         processHomeVisit(baseEvent, null);
     }
@@ -320,56 +370,6 @@ public class NCUtils {
             Timber.e(e);
         }
     }
-
-
-    // executed by event client processor
-    public static Visit eventToVisit(org.smartregister.domain.db.Event event) throws JSONException {
-        List<String> exceptions = Arrays.asList(default_obs);
-
-        Visit visit = new Visit();
-        visit.setVisitId(JsonFormUtils.generateRandomUUIDString());
-        visit.setBaseEntityId(event.getBaseEntityId());
-        visit.setDate(event.getEventDate().toDate());
-        visit.setVisitType(event.getEventType());
-        visit.setEventId(event.getEventId());
-        visit.setFormSubmissionId(event.getFormSubmissionId());
-        visit.setJson(new JSONObject(JsonFormUtils.gson.toJson(event)).toString());
-        visit.setProcessed(true);
-        visit.setCreatedAt(new Date());
-        visit.setUpdatedAt(new Date());
-        Map<String, String> eventDetails = event.getDetails();
-        if (eventDetails != null)
-            visit.setVisitGroup(eventDetails.get(Constants.ICCM_VISIT_GROUP));
-
-        Map<String, List<VisitDetail>> details = new HashMap<>();
-        if (event.getObs() != null) {
-            for (org.smartregister.domain.db.Obs obs : event.getObs()) {
-                if (!exceptions.contains(obs.getFormSubmissionField())) {
-                    VisitDetail detail = new VisitDetail();
-                    detail.setVisitDetailsId(JsonFormUtils.generateRandomUUIDString());
-                    detail.setVisitId(visit.getVisitId());
-                    detail.setVisitKey(obs.getFormSubmissionField());
-                    detail.setParentCode(obs.getParentCode());
-                    detail.setDetails(getDetailsValue(detail, obs.getValues().toString()));
-                    detail.setHumanReadable(getDetailsValue(detail, obs.getHumanReadableValues().toString()));
-                    detail.setProcessed(true);
-                    detail.setCreatedAt(new Date());
-                    detail.setUpdatedAt(new Date());
-
-                    List<VisitDetail> currentList = details.get(detail.getVisitKey());
-                    if (currentList == null)
-                        currentList = new ArrayList<>();
-
-                    currentList.add(detail);
-                    details.put(detail.getVisitKey(), currentList);
-                }
-            }
-        }
-
-        visit.setVisitDetails(details);
-        return visit;
-    }
-
     public static String getDetailsValue(VisitDetail detail, String val) {
         String clean_val = cleanString(val);
         if (detail.getVisitKey().contains("date")) {
