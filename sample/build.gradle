@@ -67,13 +67,14 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         mavenLocal()
     }
 }
 
 dependencies {
-    implementation('org.smartregister:opensrp-client-core:1.11.5-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:1.18.0-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
@@ -99,6 +100,8 @@ dependencies {
     }
 
     implementation project(":opensrp-chw-malaria")
+
+    implementation 'net.zetetic:sqlcipher-android:4.5.4'
 
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 
