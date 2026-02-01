@@ -166,6 +166,30 @@ allprojects {
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         mavenLocal()
+        maven {
+            name = "GitHubPackagesCore"
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-core")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER") ?: System.getenv("GITHUB_ACTOR")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+        maven {
+            name = "GitHubPackagesNativeForm"
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-native-form")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER") ?: System.getenv("GITHUB_ACTOR")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+        maven {
+            name = "GitHubPackagesConfigViews"
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-configurable-views")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER") ?: System.getenv("GITHUB_ACTOR")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
 dependencies {
