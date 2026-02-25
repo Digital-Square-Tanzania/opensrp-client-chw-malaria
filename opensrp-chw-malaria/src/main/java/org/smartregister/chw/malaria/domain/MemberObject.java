@@ -1,5 +1,8 @@
 package org.smartregister.chw.malaria.domain;
 
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +16,7 @@ public class MemberObject implements Serializable {
     private String address;
     private String gender;
     private String uniqueId;
-    private String age;
+    private String dob;
     private String relationalid;
     private String details;
     private String dateChwMalariaTest;
@@ -67,12 +70,12 @@ public class MemberObject implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getAge() {
-        return age;
+    public String getDob() {
+        return dob;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public String getAddress() {
@@ -322,5 +325,9 @@ public class MemberObject implements Serializable {
 
     public void setMalariaFollowUpDate(String malariaFollowUpDate) {
         this.malariaFollowUpDate = malariaFollowUpDate;
+    }
+
+    public int getAge() {
+        return new Period(new DateTime(dob), new DateTime()).getYears();
     }
 }
